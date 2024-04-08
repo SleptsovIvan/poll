@@ -1,0 +1,294 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Poll API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/admin/polls": {
+            "get": {
+                "tags": [
+                    "Poll"
+                ],
+                "summary": "Список опросов",
+                "operationId": "948b55d900ceeec54a655e7969902cc7",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "poll"
+                                                    },
+                                                    "question": {
+                                                        "type": "string",
+                                                        "example": "Some question"
+                                                    },
+                                                    "options": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                                                },
+                                                                "count": {
+                                                                    "type": "integer",
+                                                                    "example": "0"
+                                                                },
+                                                                "value": {
+                                                                    "example": "Some option",
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "type": "string"
+                                                                        },
+                                                                        {
+                                                                            "type": "integer"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Poll"
+                ],
+                "summary": "Создание опроса",
+                "operationId": "783de0942164ddac75186d765bec0e24",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "question": {
+                                                "type": "string",
+                                                "example": "Some question"
+                                            },
+                                            "options": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "example": "Some option",
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "type": "integer"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/polls/{id}": {
+            "get": {
+                "tags": [
+                    "Poll"
+                ],
+                "summary": "Опрос",
+                "operationId": "944c1cd90687e63ee9213dade15fad91",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID опроса",
+                        "required": true,
+                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "poll"
+                                                    },
+                                                    "question": {
+                                                        "type": "string",
+                                                        "example": "Some question"
+                                                    },
+                                                    "options": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                                                },
+                                                                "count": {
+                                                                    "type": "integer",
+                                                                    "example": "0"
+                                                                },
+                                                                "value": {
+                                                                    "example": "Some option",
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "type": "string"
+                                                                        },
+                                                                        {
+                                                                            "type": "integer"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Poll"
+                ],
+                "summary": "Обновить опрос",
+                "operationId": "3162d6b8e7cb4f6301c0122fb4fb2cf3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID опроса",
+                        "required": true,
+                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Poll"
+                ],
+                "summary": "Удаление опроса",
+                "operationId": "f01b2788fd1e7850d14332ea0a8e9322",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID опроса",
+                        "required": true,
+                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
