@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import axios from 'axios'
 import { useMainStore } from './main'
 import { useToastify } from '@/composables/useToastify'
@@ -11,6 +11,34 @@ export const usePollsStore = defineStore('polls', () => {
   const list = ref([])
   const item = ref({})
   const itemId = ref(null)
+
+  const sampleData = reactive({
+    question: '',
+    options: [
+      {
+        id: self.crypto.randomUUID(),
+        value: ''
+      },
+      {
+        id: self.crypto.randomUUID(),
+        value: ''
+      },
+    ]
+  })
+
+  const resetSampleData = () => {
+    sampleData.question = ''
+    sampleData.options = [
+      {
+        id: self.crypto.randomUUID(),
+        value: ''
+      },
+      {
+        id: self.crypto.randomUUID(),
+        value: ''
+      },
+    ]
+  }
 
   const getList = () => {
     axios.get('/api/admin/polls')
@@ -45,6 +73,7 @@ export const usePollsStore = defineStore('polls', () => {
         toastify.error(err)
       })
       .finally(() => {
+        resetSampleData()
         mainStore.hide('createPollModal')
       })
   }
@@ -77,6 +106,10 @@ export const usePollsStore = defineStore('polls', () => {
       .catch(err => {
         toastify.error(err)
       })
+      .finally(() => {
+        resetSampleData()
+        mainStore.hide('editPollModal')
+      })
   }
 
   return {
@@ -87,6 +120,7 @@ export const usePollsStore = defineStore('polls', () => {
     update,
     destroy,
     item,
-    itemId
+    itemId,
+    sampleData
   }
 })

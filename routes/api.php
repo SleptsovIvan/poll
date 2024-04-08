@@ -10,7 +10,6 @@ Route::middleware('auth:sanctum')->group(function() {
   Route::post('/admin/polls', [PollController::class, 'store'])->name('admin.polls.store');
   Route::put('/admin/polls/{id}', [PollController::class, 'update'])->name('admin.polls.update');
   Route::delete('/admin/polls/{id}', [PollController::class, 'destroy'])->name('admin.polls.destroy');
-
   Route::get('/admin/user', [UserController::class, 'show'])->name('admin.user.show');
 });
 

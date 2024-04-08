@@ -58,7 +58,7 @@ const removeOption = (index) => {
     class="fixed top-0 left-0 w-full h-full backdrop-blur">
     <div class="mx-auto max-w-[560px]">
       <div class="flex items-center flex-col my-8">
-        <div class="font-medium text-3xl">Изменить опрос</div>
+        <div class="font-medium text-3xl">Обновить опрос</div>
       </div>
 
       <form @click.stop class="flex flex-col p-11 pb-12 rounded-xl bg-white shadow-xl border border-gray-50"
@@ -95,6 +95,12 @@ const removeOption = (index) => {
         </div>
 
         <button @click.prevent="save" class="btn-solid mt-4">Сохранить</button>
+
+        <div class="text-center mt-4">
+          <span @click="pollsStore.destroy(pollsStore.itemId)" class="cursor-pointer text-sm text-red-400 hover:text-red-500">
+            Удалить
+          </span>
+        </div>
       </form>
     </div>
   </div>

@@ -14,14 +14,19 @@ class PollController extends Controller
 {
     function show(Request $request, $id)
     {
-        return new PollResource(
-            Poll::where('id', $id)->first()
-        );
+        $user_id = $request->user()->id;
+        $poll = Poll::find($id);
+        if (!$poll || $poll->user_id != $user_id) {
+            return response()->json([
+                'error' => 'Forbidden'
+            ], 403);
+        }
+        return new PollResource($poll);
     }
 
     function index(Request $request)
     {
-        $user_id = auth()->user()->id;
+        $user_id = $request->user()->id;
         return PollResource::collection(
             Poll::where('user_id', $user_id)->get()
         );
@@ -29,7 +34,7 @@ class PollController extends Controller
 
     function store(Request $request)
     {
-        $user_id = auth()->user()->id;
+        $user_id = $request->user()->id;
         $request->validate([
             'question' => ['string', 'required', 'max:255'],
             'options' => ['array', 'required'],
@@ -55,7 +60,7 @@ class PollController extends Controller
     }
 
     function update(Request $request, $id) {
-        $user_id = auth()->user()->id;
+        $user_id = $request->user()->id;
         $request->validate([
             'question' => ['string', 'required', 'max:255'],
             'options' => ['array', 'required'],
@@ -128,7 +133,7 @@ class PollController extends Controller
     }
 
     function destroy(Request $request, $id) {
-        $user_id = auth()->user()->id;
+        $user_id = $request->user()->id;
         $poll = Poll::find($id);
         if (!$poll || $poll->user_id != $user_id) {
             return response()->json([

@@ -7,31 +7,17 @@ import { usePollsStore } from '@/store/polls'
 const mainStore = useMainStore()
 const pollsStore = usePollsStore()
 
-const data = reactive({
-  question: '',
-  options: [
-    {
-      id: self.crypto.randomUUID(),
-      value: ''
-    },
-    {
-      id: self.crypto.randomUUID(),
-      value: ''
-    },
-  ]
-})
-
 const cancel = () => {
   mainStore.hide('createPollModal')
 }
 
 const save = () => {
-  if (!data.question) {
+  if (!pollsStore.sampleData.question) {
     return
   }
   
   const options = []
-  data.options.forEach(el => {
+  pollsStore.sampleData.options.forEach(el => {
     if (el.value != '') {
       options.push({
         value: el.value
@@ -44,23 +30,23 @@ const save = () => {
   }
 
   pollsStore.create({
-    question: data.question,
+    question: pollsStore.sampleData.question,
     options: options
   })
 }
 
 const addOption = () => {
-  data.options.push({
+  pollsStore.sampleData.options.push({
     value: '',
     id: self.crypto.randomUUID(),
   })
 }
 
 const removeOption = (index) => {
-  if (data.options.length == 2) {
+  if (pollsStore.sampleData.options.length == 2) {
     return
   }
-  data.options.splice(index, 1)
+  pollsStore.sampleData.options.splice(index, 1)
 }
 
 </script>
@@ -77,16 +63,16 @@ const removeOption = (index) => {
         autocomplete="off">
         <div class="mb-1 font-medium">Вопрос</div>
 
-        <textarea placeholder="Введите вопрос" v-model="data.question"
+        <textarea placeholder="Введите вопрос" v-model="pollsStore.sampleData.question"
           class="mb-6 border min-h-11 px-4 py-2 border-gray-300 rounded-lg focus:border-blue-500 outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
         <div>
 
           <div class="mb-1 font-medium">Ответы</div>
-          <div class="flex mb-4 items-center" v-for="(i, index) in data.options" :key="i.id">
+          <div class="flex mb-4 items-center" v-for="(i, index) in pollsStore.sampleData.options" :key="i.id">
             <input type="text" placeholder="Введите вариант ответа" v-model="i.value"
               class="border w-full min-h-11 px-4 py-2 border-gray-300 rounded-lg focus:border-blue-500 outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
 
-            <div v-if="data.options.length > 2" @click="removeOption(index)"
+            <div v-if="pollsStore.sampleData.options.length > 2" @click="removeOption(index)"
               class="cursor-pointer ms-2 w-9 min-w-9 h-9 flex items-center hover:bg-blue-600 justify-center bg-blue-500 rounded-full">
               <TrashIcon class="w-5 text-white stroke-2" />
             </div>
