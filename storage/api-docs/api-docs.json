@@ -9,7 +9,7 @@
         "/api/admin/polls": {
             "get": {
                 "tags": [
-                    "Poll"
+                    "Admin poll"
                 ],
                 "summary": "Список опросов",
                 "operationId": "948b55d900ceeec54a655e7969902cc7",
@@ -79,7 +79,7 @@
             },
             "post": {
                 "tags": [
-                    "Poll"
+                    "Admin poll"
                 ],
                 "summary": "Создание опроса",
                 "operationId": "783de0942164ddac75186d765bec0e24",
@@ -144,7 +144,7 @@
         "/api/admin/polls/{id}": {
             "get": {
                 "tags": [
-                    "Poll"
+                    "Admin poll"
                 ],
                 "summary": "Опрос",
                 "operationId": "944c1cd90687e63ee9213dade15fad91",
@@ -223,7 +223,7 @@
             },
             "put": {
                 "tags": [
-                    "Poll"
+                    "Admin poll"
                 ],
                 "summary": "Обновить опрос",
                 "operationId": "3162d6b8e7cb4f6301c0122fb4fb2cf3",
@@ -257,7 +257,7 @@
             },
             "delete": {
                 "tags": [
-                    "Poll"
+                    "Admin poll"
                 ],
                 "summary": "Удаление опроса",
                 "operationId": "f01b2788fd1e7850d14332ea0a8e9322",
@@ -280,6 +280,139 @@
                                         "success": {
                                             "type": "boolean",
                                             "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/poll": {
+            "post": {
+                "tags": [
+                    "Widget poll"
+                ],
+                "summary": "Выбор ответа",
+                "operationId": "6bf8ae926c07f1fbb277a8cd8ea40a60",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "poll_id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                            },
+                                            "option_id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/polls/{id}": {
+            "get": {
+                "tags": [
+                    "Widget poll"
+                ],
+                "summary": "Опрос",
+                "operationId": "68f6adec9db9844d09d208ae80608f82",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID опроса",
+                        "required": true,
+                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "poll"
+                                                    },
+                                                    "question": {
+                                                        "type": "string",
+                                                        "example": "Some question"
+                                                    },
+                                                    "options": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "example": "69a6c62c-19cf-4977-bd96-ca4064ade088"
+                                                                },
+                                                                "count": {
+                                                                    "type": "integer",
+                                                                    "example": "0"
+                                                                },
+                                                                "value": {
+                                                                    "example": "Some option",
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "type": "string"
+                                                                        },
+                                                                        {
+                                                                            "type": "integer"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"

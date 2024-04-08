@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API\V1\Swagger;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 /**
  *
  * @OA\Post(
  *      path="/api/admin/polls",
  *      summary="Создание опроса",
- *      tags={"Poll"},
+ *      tags={"Admin poll"},
  *      @OA\RequestBody(
  *          @OA\JsonContent(
  *              allOf={
@@ -38,7 +37,7 @@ use Illuminate\Http\Request;
  * @OA\Get(
  *      path="/api/admin/polls/{id}",
  *      summary="Опрос",
- *      tags={"Poll"},
+ *      tags={"Admin poll"},
  *      @OA\Parameter(
  *          description="ID опроса",
  *          in="path",
@@ -70,7 +69,7 @@ use Illuminate\Http\Request;
  *  @OA\Put(
  *      path="/api/admin/polls/{id}",
  *      summary="Обновить опрос",
- *      tags={"Poll"},
+ *      tags={"Admin poll"},
  *      @OA\Parameter(
  *          description="ID опроса",
  *          in="path",
@@ -90,7 +89,7 @@ use Illuminate\Http\Request;
  * @OA\Get(
  *      path="/api/admin/polls",
  *      summary="Список опросов",
- *      tags={"Poll"},
+ *      tags={"Admin poll"},
  *      @OA\Response(
  *          response=200,
  *          description="Ok",
@@ -115,7 +114,7 @@ use Illuminate\Http\Request;
  *  @OA\Delete(
  *      path="/api/admin/polls/{id}",
  *      summary="Удаление опроса",
- *      tags = {"Poll"},
+ *      tags = {"Admin poll"},
  *      @OA\Parameter(
  *          description="ID опроса",
  *          in="path",
