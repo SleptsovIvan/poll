@@ -2,14 +2,14 @@
 
 Commands to run project:
 ```
-[comment] Clone the project and run sail
+# Clone the project and run sail
 git clone git@github.com:SleptsovIvan/poll.git
 cd poll
 
-[comment] Migration (after changing your DB settings in .env)
+# Migration (after changing your DB settings in .env)
 sail up -d
 sail artisan migrate
 
-[comment] Install dependency with NPM
+# Install dependency with NPM
 sail npm install
 ```
